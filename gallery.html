@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sports Kits Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .kit-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin: 15px;
+            padding: 15px;
+            width: 250px;
+            text-align: center;
+        }
+        .kit-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sports Kits Gallery</h1>
+    <div class="gallery" id="gallery"></div>
+
+    <script>
+        function fetchKits() {
+            fetch('/get-all-kits')
+                .then(response => response.json())
+                .then(kits => {
+                    const galleryDiv = document.getElementById('gallery');
+                    galleryDiv.innerHTML = '';
+
+                    kits.forEach(kit => {
+                        if (kit.image_url) {
+                            const kitCard = document.createElement('div');
+                            kitCard.classList.add('kit-card');
+                            
+                            kitCard.innerHTML = `
+                                <h3>Kit ID: ${kit.kit_id}</h3>
+                                <img src="${kit.image_url}" alt="Kit Image">
+                                <p>Design: ${kit.design}</p>
+                            `;
+                            galleryDiv.appendChild(kitCard);
+                        }
+                    });
+                });
+        }
+
+        window.onload = fetchKits;
+    </script>
+    <a href="/">Go Back</a>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Football Teams</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #eef2f7;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #007bff;
+        }
+        .teams-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .team-card {
+            width: 250px;
+            margin: 15px;
+            padding: 20px;
+            background: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
+        img {
+            width: 80px;
+            height: auto;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Football Teams</h1>
+
+    {% if teams %}
+        <div class="teams-container">
+            {% for team in teams %}
+                <div class="team-card">
+                    <img src="{{ team.team.logo }}" alt="Team Logo">
+                    <h2>{{ team.team.name }}</h2>
+                    <p><strong>Country:</strong> {{ team.team.country }}</p>
+                    <p><strong>Founded:</strong> {{ team.team.founded }}</p>
+                    <p><strong>Stadium:</strong> {{ team.venue.name }} ({{ team.venue.city }})</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No team details available.</p>
+    {% endif %}
+
+    <a href="/index" class="back-link">🏠 Back to Home</a>
+</body>
+</html>

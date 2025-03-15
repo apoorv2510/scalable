@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sports Kit Designer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: url("{{ url_for('static', filename='images/football-bg.jpg') }}") no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+        }
+
+        /* Dark overlay for better text contrast */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6); /* Darker overlay for better contrast */
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1; /* Ensure content is above background */
+        }
+
+        .header {
+            background-color: rgba(0, 123, 255, 0.9); /* Slight transparency for a modern look */
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 24px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95); /* Slight transparency */
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            margin: 15px 0;
+            text-align: left;
+        }
+
+        input, textarea, button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #ffcc00;
+            color: black;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #ffaa00;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .nav-links a {
+            background: rgba(255, 204, 0, 0.9); /* Gold color to stand out */
+            color: black;
+            padding: 12px 20px;
+            margin: 5px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 170, 0, 0.9);
+        }
+
+        .logout-btn {
+            margin-top: 20px;
+            display: inline-block;
+            background: red;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .logout-btn:hover {
+            background: darkred;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            Welcome, {{ current_user.id }}! ⚡
+        </div>
+
+        <div class="card">
+            <h2>Create and Upload a New Kit</h2>
+            <form action="/create-and-upload-kit" method="post" enctype="multipart/form-data">
+                <label>Kit Design:</label>
+                <textarea name="design" placeholder="Describe your kit design..." required></textarea>
+                
+                <label>Upload Kit Image (optional):</label>
+                <input type="file" name="file">
+
+                <button type="submit">Create & Upload Kit</button>
+            </form>
+        </div>
+
+        <h2>Manage Your Kits</h2>
+        <div class="nav-links">
+            <a href="/gallery">🖼️ View Kit Gallery</a>
+            <a href="/customize-jersey-page">🏀 Customize Jersey</a>
+            <a href="/get-football-teams">⚽ View Football teams</a>
+        </div>
+
+        <a href="/logout" class="logout-btn">🚪 Logout</a>
+    </div>
+</body>
+</html>
